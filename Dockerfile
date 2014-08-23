@@ -15,7 +15,7 @@ RUN mkdir /var/run/ldap
 
 EXPOSE 389 636
 
-VOLUME ["/var/lib/ldap","/etc/ldap/slapd.d"]
+VOLUME ["/var/lib/ldap/","/tmp/","/etc/ldap/slapd.d"]
 
 ENTRYPOINT ["/usr/local/bin/start_slapd", "-h ldapi:/// ldap:/// ldaps:///"]
 
