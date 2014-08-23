@@ -14,6 +14,7 @@ olcDbConfig: set_lk_max_locks 1500
 olcDbConfig: set_lk_max_lockers 1500
 olcDbIndex: objectClass eq
 olcDbIndex: uid eq,pres,sub
+olcDbIndex: cn eq
 
 dn: cn=module,cn=config
 objectClass: olcModuleList
@@ -39,10 +40,19 @@ objectClass: dcObject
 objectClass: organization
 o: corp
 
+dn: cn=test,dc=com
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+cn: test
+sn: user
+userPassword:: e2NyeXB0fTl0Sk5zb0lWL3BqZ1E=
+
 dn: olcDatabase={1}hdb,cn=config
 changetype: modify
 add: olcAccess
 olcAccess: to attrs=userPassword by dn="cn=admin,dc=com" write by anonymous auth by self write by * none
+olcAccess: to * by self write by users read by * none
 olcAccess: to attrs=shadowLastChange by self write by * read
 olcAccess: to dn.base="" by * read
 olcAccess: to * by dn="cn=admin,dc=com" write
