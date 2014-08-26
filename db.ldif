@@ -40,13 +40,14 @@ objectClass: dcObject
 objectClass: organization
 o: corp
 
-dn: cn=test,dc=com
-objectClass: top
-objectClass: person
-objectClass: organizationalPerson
-cn: test
-sn: user
-userPassword:: e2NyeXB0fTl0Sk5zb0lWL3BqZ1E=
+# Preseed test user accounts?
+#dn: cn=test,dc=com
+#objectClass: top
+#objectClass: person
+#objectClass: organizationalPerson
+#cn: test
+#sn: user
+#userPassword:: e2NyeXB0fTl0Sk5zb0lWL3BqZ1E=
 
 dn: olcDatabase={1}hdb,cn=config
 changetype: modify
