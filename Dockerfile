@@ -1,9 +1,10 @@
-FROM ubuntu:14.04
+FROM ubuntu:14.04.1
 
 # Derived from cpuguy83/ldap
 # Credit to original maintainer Brian Goff
 # We just add volumes and move to Ubuntu
 MAINTAINER Stephan Buys <stephan.buys@panoptix.co.za>
+ENV REFRESHED_ON "29 Jan 2015"
 
 RUN apt-get update -qq && apt-get install -y slapd ldap-utils -qq
 RUN rm -rf /etc/ldap/slapd.d && rm -rf /var/lib/ldap/*
