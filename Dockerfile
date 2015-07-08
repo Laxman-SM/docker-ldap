@@ -1,23 +1,22 @@
-FROM ubuntu:14.04.1
+FROM ubuntu:14.04.2
 
 # Derived from cpuguy83/ldap
 # Credit to original maintainer Brian Goff
 # We just add volumes and move to Ubuntu
 MAINTAINER Stephan Buys <stephan.buys@panoptix.co.za>
-ENV REFRESHED_ON "29 Jan 2015"
+ENV REFRESHED_ON "03 Jul 2015"
 
 RUN apt-get update -qq && apt-get install -y slapd ldap-utils -qq
-RUN rm -rf /etc/ldap/slapd.d && rm -rf /var/lib/ldap/*
-ADD slapd.tar.gz /etc/ldap
+
 ADD db.ldif /tmp/
+ADD start_ldap.sh /usr/local/bin/
 
-ADD start_slapd.sh /usr/local/bin/start_slapd
-RUN mkdir /var/run/ldap
+ENV LDAP_ROOTPASS password
+ENV LDAP_ORGANISATION Internal LDAP
+ENV LDAP_DOMAIN com
 
-EXPOSE 389 636
+VOLUME ["/var/lib/ldap/"]
+VOLUME ["/etc/ldap/slapd.d"]
+EXPOSE 389 
 
-VOLUME ["/var/lib/ldap/","/tmp/","/etc/ldap/slapd.d"]
-
-ENTRYPOINT ["/usr/local/bin/start_slapd", "-h ldapi:/// ldap:/// ldaps:///"]
-
-CMD []
+ENTRYPOINT /usr/local/bin/start_ldap.sh
